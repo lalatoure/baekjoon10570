@@ -1,0 +1,40 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<stdlib.h>
+int main(void) {
+	int N;
+	int T;
+	scanf("%d", &N);
+	for (int i = 0; i < N; i++) {
+		scanf("%d", &T);
+		int max = 0;
+		int min = 1000;
+		int* pi;
+		int* count;
+		pi = (int*)calloc(1000, sizeof(int));
+		count = (int*)calloc(1000, sizeof(int));
+		for (int j = 0; j < T; j++) {
+			scanf("%d", &pi[j]);
+		}for (int j = 0; j < T; j++) {
+			for (int k = 0; k < T; k++) {
+				if (pi[j] == pi[k]) {
+					count[pi[j]]++;
+				}
+			}
+		}for (int j = 0; j < T; j++) {
+			if (max == count[pi[j]]) {
+				if (min > pi[j]) {
+					min = pi[j];
+				}
+
+			}
+			else if (max < count[pi[j]]) {
+				max = count[pi[j]];
+				min = pi[j];
+			}
+		}printf("%d\n", min);
+		free(pi);
+		free(count);
+	}
+	return 0;
+}
